@@ -1,1296 +1,1579 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇯🇵 Mellow's Nihongo</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇯🇵 Mellow's Nihongo</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            min-height: 100vh;
-            color: #333;
-        }
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+min-height: 100vh;
+color: #333;
+}
 
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 16px;
-            min-height: 100vh;
-        }
+.container {
+max-width: 400px;
+margin: 0 auto;
+padding: 16px;
+min-height: 100vh;
+}
 
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 24px;
-            padding-top: 24px;
-        }
+.header {
+text-align: center;
+color: white;
+margin-bottom: 24px;
+padding-top: 24px;
+}
 
-        .header h1 {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+.header h1 {
+font-size: 28px;
+font-weight: bold;
+margin-bottom: 8px;
+}
 
-        .header p {
-            color: #bfdbfe;
-            font-size: 14px;
-        }
+.header p {
+color: #bfdbfe;
+font-size: 14px;
+}
 
-        .achievement-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-            color: white;
-        }
+.achievement-card {
+background: rgba(255, 255, 255, 0.1);
+border-radius: 12px;
+padding: 16px;
+margin-bottom: 24px;
+color: white;
+}
 
-        .achievement-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
+.achievement-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 8px;
+font-size: 14px;
+}
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            overflow: hidden;
-        }
+.progress-bar {
+width: 100%;
+height: 8px;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 4px;
+overflow: hidden;
+}
 
-        .progress-fill {
-            height: 100%;
-            background: #fbbf24;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
+.progress-fill {
+height: 100%;
+background: #fbbf24;
+border-radius: 4px;
+transition: width 0.5s ease;
+}
 
-        .achievement-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            font-size: 12px;
-            color: #bfdbfe;
-        }
+.achievement-stats {
+display: flex;
+justify-content: space-between;
+margin-top: 8px;
+font-size: 12px;
+color: #bfdbfe;
+}
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 16px;
-            overflow: hidden;
-        }
+.card {
+background: white;
+border-radius: 12px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+margin-bottom: 16px;
+overflow: hidden;
+}
 
-        .card-content {
-            padding: 16px;
-        }
+.card-content {
+padding: 16px;
+}
 
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+.section-title {
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
 
-        .button {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.button {
+width: 100%;
+padding: 16px;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+margin-bottom: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 
-        .button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
+.button:hover {
+opacity: 0.9;
+transform: translateY(-1px);
+}
 
-        .button-blue { background: #3b82f6; color: white; }
-        .button-green { background: #10b981; color: white; }
-        .button-purple { background: #8b5cf6; color: white; }
-        .button-orange { background: #f59e0b; color: white; }
-        .button-pink { background: #ec4899; color: white; }
-        .button-teal { background: #14b8a6; color: white; }
-        .button-red { background: #ef4444; color: white; }
-        .button-gray { background: #6b7280; color: white; }
+.button-blue { background: #3b82f6; color: white; }
+.button-green { background: #10b981; color: white; }
+.button-purple { background: #8b5cf6; color: white; }
+.button-orange { background: #f59e0b; color: white; }
+.button-pink { background: #ec4899; color: white; }
+.button-teal { background: #14b8a6; color: white; }
+.button-red { background: #ef4444; color: white; }
+.button-gray { background: #6b7280; color: white; }
 
-        .button-info {
-            font-size: 14px;
-            opacity: 0.9;
-            font-weight: normal;
-        }
+.button-info {
+font-size: 14px;
+opacity: 0.9;
+font-weight: normal;
+}
 
-        .lesson-button {
-            width: 100%;
-            padding: 12px;
-            background: #dbeafe;
-            border: none;
-            border-radius: 8px;
-            text-align: left;
-            cursor: pointer;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
+.lesson-button {
+width: 100%;
+padding: 12px;
+background: #dbeafe;
+border: none;
+border-radius: 8px;
+text-align: left;
+cursor: pointer;
+margin-bottom: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: background 0.2s;
+}
 
-        .lesson-button:hover {
-            background: #bfdbfe;
-        }
+.lesson-button:hover {
+background: #bfdbfe;
+}
 
-        .lesson-button.priority {
-            background: #fecaca;
-            border: 2px solid #ef4444;
-        }
+.lesson-button.priority {
+background: #fecaca;
+border: 2px solid #ef4444;
+}
 
-        .lesson-button.priority:hover {
-            background: #fca5a5;
-        }
+.lesson-button.priority:hover {
+background: #fca5a5;
+}
 
-        .hidden {
-            display: none;
-        }
+.hidden {
+display: none;
+}
 
-        .input-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
+.input-group {
+display: flex;
+gap: 8px;
+margin-bottom: 8px;
+}
 
-        .text-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-        }
+.text-input {
+flex: 1;
+padding: 8px;
+border: 1px solid #d1d5db;
+border-radius: 6px;
+font-size: 14px;
+}
 
-        .word-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 8px;
-            background: #fecaca;
-            color: #991b1b;
-            border-radius: 4px;
-            font-size: 12px;
-            margin: 2px;
-        }
+.word-tag {
+display: inline-flex;
+align-items: center;
+padding: 4px 8px;
+background: #fecaca;
+color: #991b1b;
+border-radius: 4px;
+font-size: 12px;
+margin: 2px;
+}
 
-        .word-tag button {
-            background: none;
-            border: none;
-            color: #dc2626;
-            margin-left: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.word-tag button {
+background: none;
+border: none;
+color: #dc2626;
+margin-left: 4px;
+cursor: pointer;
+font-weight: bold;
+}
 
-        .lesson-content {
-            line-height: 1.6;
-            color: #374151;
-        }
+.lesson-content {
+line-height: 1.6;
+color: #374151;
+}
 
-        .lesson-content h3 {
-            color: #1f2937;
-            font-size: 18px;
-            margin: 16px 0 8px 0;
-            font-weight: bold;
-        }
+.lesson-content h3 {
+color: #1f2937;
+font-size: 18px;
+margin: 16px 0 8px 0;
+font-weight: bold;
+}
 
-        .lesson-content p {
-            margin-bottom: 12px;
-        }
+.lesson-content p {
+margin-bottom: 12px;
+}
 
-        .lesson-content ul {
-            margin: 8px 0 16px 20px;
-        }
+.lesson-content ul {
+margin: 8px 0 16px 20px;
+}
 
-        .lesson-content li {
-            margin-bottom: 4px;
-        }
+.lesson-content li {
+margin-bottom: 4px;
+}
 
-        .back-button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            margin-right: 16px;
-        }
+.back-button {
+background: none;
+border: none;
+color: white;
+font-size: 24px;
+cursor: pointer;
+margin-right: 16px;
+}
 
-        .priority-badge {
-            background: #ef4444;
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 8px;
-        }
+.priority-badge {
+background: #ef4444;
+color: white;
+font-size: 10px;
+padding: 2px 6px;
+border-radius: 4px;
+margin-left: 8px;
+}
 
-        .performance-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
+.performance-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px 0;
+border-bottom: 1px solid #e5e7eb;
+}
 
-        .performance-item:last-child {
-            border-bottom: none;
-        }
+.performance-item:last-child {
+border-bottom: none;
+}
 
-        .performance-score {
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
+.performance-score {
+font-weight: bold;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 12px;
+}
 
-        .score-strong {
-            background: #d1fae5;
-            color: #065f46;
-        }
+.score-strong {
+background: #d1fae5;
+color: #065f46;
+}
 
-        .score-good {
-            background: #dbeafe;
-            color: #1e40af;
-        }
+.score-good {
+background: #dbeafe;
+color: #1e40af;
+}
 
-        .score-needs-work {
-            background: #fee2e2;
-            color: #991b1b;
-        }
+.score-needs-work {
+background: #fee2e2;
+color: #991b1b;
+}
 
-        .loading {
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
+.loading {
+text-align: center;
+color: white;
+padding: 20px;
+}
 
-        .timer-display {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 16px;
-            font-weight: bold;
-            font-size: 18px;
-        }
+.config-panel {
+background: rgba(255, 255, 255, 0.1);
+border-radius: 8px;
+padding: 12px;
+margin-bottom: 16px;
+color: white;
+font-size: 12px;
+}
 
-        .timer-display.warning {
-            background: #ef4444;
-            animation: pulse 1s infinite;
-        }
+.config-panel h4 {
+margin-bottom: 8px;
+color: #fbbf24;
+}
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
+.conversation-screen {
+background: linear-gradient(135deg, #0f172a, #1e293b);
+}
 
-        .conversation-screen {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-        }
+.conversation-bubble {
+background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+padding: 16px;
+margin: 12px 0;
+color: white;
+}
 
-        .conversation-bubble {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 16px;
-            margin: 12px 0;
-            color: white;
-        }
+.conversation-bubble.user {
+background: #3b82f6;
+margin-left: 20px;
+}
 
-        .conversation-bubble.user {
-            background: #3b82f6;
-            margin-left: 20px;
-        }
+.conversation-bubble.ai {
+background: rgba(255, 255, 255, 0.1);
+margin-right: 20px;
+}
 
-        .conversation-bubble.ai {
-            background: rgba(255, 255, 255, 0.1);
-            margin-right: 20px;
-        }
+.conversation-input {
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+width: calc(100% - 40px);
+max-width: 360px;
+display: flex;
+gap: 8px;
+}
 
-        .conversation-input {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
-            max-width: 360px;
-            display: flex;
-            gap: 8px;
-        }
+.conversation-input input {
+flex: 1;
+padding: 12px;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+}
 
-        .conversation-input input {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+.conversation-input button {
+padding: 12px 16px;
+background: #3b82f6;
+color: white;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+}
 
-        .conversation-input button {
-            padding: 12px 16px;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-    </style>
+.timer-display {
+background: rgba(255, 255, 255, 0.1);
+color: white;
+padding: 8px 16px;
+border-radius: 8px;
+text-align: center;
+margin-bottom: 16px;
+font-weight: bold;
+font-size: 18px;
+}
+
+.timer-display.warning {
+background: #ef4444;
+animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <!-- Menu Screen -->
-        <div id="menu-screen">
-            <div class="header">
-                <h1>🇯🇵 Mellow's Nihongo</h1>
-                <p id="header-text">Genki 1 - Chapter Assessment Ready</p>
-                <div class="achievement-card">
-                    <div class="achievement-header">
-                        <span>Today's Target Areas</span>
-                        <span id="target-count">4 topics</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="achievement-stats">
-                        <span>🎯 Focus on weak areas</span>
-                        <span>📈 Improve to 75%+</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Daily Assessment -->
-            <button class="button button-green" onclick="startDailyAssessment()">
-                <div>
-                    <div>📝 Morning Assessment</div>
-                    <div class="button-info">15-20 questions • 25 min timer</div>
-                </div>
-                <span>⏰</span>
-            </button>
-
-            <!-- Priority Lessons Section -->
-            <div class="card">
-                <div class="card-content">
-                    <h3 class="section-title">🚨 Priority Study Areas</h3>
-                    <div id="priority-lessons">
-                        <button class="lesson-button priority" onclick="showLesson('particles')">
-                            <span>Particles は, を, に <span class="priority-badge">WEAK</span></span>
-                            <span>›</span>
-                        </button>
-                        <button class="lesson-button priority" onclick="showLesson('verbs')">
-                            <span>Present/Past Tense Verbs <span class="priority-badge">WEAK</span></span>
-                            <span>›</span>
-                        </button>
-                        <button class="lesson-button priority" onclick="showLesson('adjectives')">
-                            <span>い/な Adjectives <span class="priority-badge">WEAK</span></span>
-                            <span>›</span>
-                        </button>
-                        <button class="lesson-button priority" onclick="showLesson('time')">
-                            <span>Time Expressions <span class="priority-badge">WEAK</span></span>
-                            <span>›</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Targeted Practice -->
-            <h3 style="color: white; margin: 16px 0 8px 0;">🎯 Targeted Practice</h3>
-            
-            <button class="button button-red" onclick="startExercise('particles')">
-                <div>
-                    <div>Particle Practice Drill</div>
-                    <div class="button-info">15 questions • Focus practice</div>
-                </div>
-                <span>🔥</span>
-            </button>
-
-            <button class="button button-orange" onclick="startExercise('verbs')">
-                <div>
-                    <div>Verb Conjugation Practice</div>
-                    <div class="button-info">12 questions • Present/Past</div>
-                </div>
-                <span>🔥</span>
-            </button>
-
-            <button class="button button-purple" onclick="startExercise('adjectives')">
-                <div>
-                    <div>Adjective Forms Practice</div>
-                    <div class="button-info">10 questions • い/な forms</div>
-                </div>
-                <span>🔥</span>
-            </button>
-
-            <!-- Conversation Practice -->
-            <button class="button button-purple" onclick="startConversation()">
-                <div>
-                    <div>🗣️ Izakaya Conversation Practice</div>
-                    <div class="button-info">Role-play • Film, tech, work topics</div>
-                </div>
-                <span>🍻</span>
-            </button>
-
-            <!-- Flashcards -->
-            <button class="button button-teal" onclick="startFlashcards()">
-                <div>
-                    <div id="flashcard-title">🗂️ Genki 1 Flashcards</div>
-                    <div class="button-info" id="flashcard-info">25 cards • New vocab added</div>
-                </div>
-                <span>⭐</span>
-            </button>
-
-            <!-- Results Tab -->
-            <button class="button button-gray" onclick="showResults()">
-                <div>
-                    <div>📊 Performance Results</div>
-                    <div class="button-info">Track your progress</div>
-                </div>
-                <span>📈</span>
-            </button>
-
-            <!-- Unknown Words Collection -->
-            <div class="card">
-                <div class="card-content">
-                    <h3 class="section-title">⭐ Unknown Words Collection</h3>
-                    <div class="input-group">
-                        <input type="text" id="new-word-input" class="text-input" placeholder="Add unknown word/kanji...">
-                        <button class="button button-blue" style="width: auto; margin: 0; padding: 8px 16px;" onclick="addUnknownWord()">Add</button>
-                    </div>
-                    <div id="unknown-words-display"></div>
-                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">💡 Copy this list for your next assessment</p>
-                </div>
-            </div>
-
-            <!-- End of Day Test -->
-            <button class="button button-orange" onclick="startEndOfDayTest()">
-                <div>
-                    <div>🌅 End of Day Review Test</div>
-                    <div class="button-info">20 questions • 25 min timer</div>
-                </div>
-                <span>🏆</span>
-            </button>
-
-            <!-- Ready for Tomorrow -->
-            <button class="button button-green" onclick="prepareForTomorrow()">
-                <div>
-                    <div>📅 Ready for Tomorrow?</div>
-                    <div class="button-info">Export today's progress</div>
-                </div>
-                <span>📝</span>
-            </button>
-        </div>
-
-        <!-- Assessment Screen -->
-        <div id="assessment-screen" class="hidden">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2>📝 Morning Assessment</h2>
-                <div class="timer-display" id="assessment-timer">25:00</div>
-                <p>Question <span id="assessment-current">1</span> of <span id="assessment-total">20</span></p>
-            </div>
-            <div class="card" style="margin: 20px 0;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 id="assessment-question" style="font-size: 20px; margin-bottom: 30px;">Ready to start your assessment?</h3>
-                    <div id="assessment-options">
-                        <button class="button button-green" onclick="loadAssessmentQuestion()">Begin Assessment</button>
-                    </div>
-                    <div id="assessment-result" class="hidden" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
-                        <p id="assessment-explanation"></p>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; color: white;">
-                <p>Progress: <span id="assessment-progress">0</span> / <span id="assessment-total-bottom">20</span></p>
-            </div>
-        </div>
-
-        <!-- Lesson Screen -->
-        <div id="lesson-screen" class="hidden">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2 id="lesson-title">Lesson</h2>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <div id="lesson-content" class="lesson-content">
-                        Loading lesson...
-                    </div>
-                </div>
-            </div>
-            <button class="button button-blue" onclick="startExerciseFromLesson()" style="margin-top: 16px;">
-                Practice This Topic
-            </button>
-        </div>
-
-        <!-- Exercise Screen -->
-        <div id="exercise-screen" class="hidden">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2 id="exercise-title">Exercise</h2>
-                <p>Question <span id="current-q">1</span> of <span id="total-q">10</span></p>
-            </div>
-            <div class="card" style="margin: 20px 0;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 id="question-text" style="font-size: 24px; margin-bottom: 30px;">Loading...</h3>
-                    <div id="options"></div>
-                    <div id="result" class="hidden" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
-                        <p id="explanation"></p>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; color: white;">
-                <p>Score: <span id="score">0</span> / <span id="attempts">0</span></p>
-            </div>
-        </div>
-
-        <!-- Conversation Screen -->
-        <div id="conversation-screen" class="hidden conversation-screen">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2>🗣️ Izakaya Chat</h2>
-                <p id="conversation-topic">Tonight's topic: Technology & Work</p>
-            </div>
-            <div id="conversation-area" style="padding-bottom: 80px; height: calc(100vh - 120px); overflow-y: auto;">
-                <div class="conversation-bubble ai">
-                    こんばんは！いらっしゃいませ！今日はどんなお仕事をされているんですか？
-                    <br><small style="opacity: 0.7;">(Good evening! Welcome! What kind of work do you do?)</small>
-                </div>
-            </div>
-            <div class="conversation-input">
-                <input type="text" id="conversation-input" placeholder="Type your response in Japanese...">
-                <button onclick="sendConversationMessage()">Send</button>
-            </div>
-        </div>
-
-        <!-- Flashcard Screen -->
-        <div id="flashcard-screen" class="hidden">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2 id="flashcard-screen-title">🗂️ Genki 1 Flashcards</h2>
-                <p>Card <span id="card-num">1</span> of <span id="total-flashcards">25</span></p>
-            </div>
-            <div class="card" style="margin: 20px 0; min-height: 300px;">
-                <div class="card-content" style="text-align: center; display: flex; flex-direction: column; justify-content: center; height: 280px;">
-                    <div id="card-front" style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">学生</div>
-                    <div id="card-back" class="hidden" style="font-size: 20px; color: #3b82f6; margin-bottom: 30px;">がくせい (student)</div>
-                    <div id="card-buttons" class="hidden" style="display: flex; gap: 10px;">
-                        <button class="button button-red" style="margin: 0; flex: 1;" onclick="nextFlashcard(false)">❌ Don't Know</button>
-                        <button class="button button-green" style="margin: 0; flex: 1;" onclick="nextFlashcard(true)">✅ Know It</button>
-                    </div>
-                    <button id="reveal-btn" class="button button-blue" style="margin: 0;" onclick="revealCard()">Reveal Answer</button>
-                </div>
-            </div>
-            <div style="text-align: center; color: white;">
-                <p>Known: <span id="known-count">0</span> / <span id="total-cards">0</span></p>
-            </div>
-        </div>
-
-        <!-- End of Day Test Screen -->
-        <div id="end-test-screen" class="hidden">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2>🌅 End of Day Review</h2>
-                <div class="timer-display" id="end-test-timer">25:00</div>
-                <p>Question <span id="end-test-current">1</span> of <span id="end-test-total">20</span></p>
-            </div>
-            <div class="card" style="margin: 20px 0;">
-                <div class="card-content" style="text-align: center;">
-                    <h3 id="end-test-question" style="font-size: 20px; margin-bottom: 30px;">Loading...</h3>
-                    <div id="end-test-options"></div>
-                    <div id="end-test-result" class="hidden" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
-                        <p id="end-test-explanation"></p>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; color: white;">
-                <p>Score: <span id="end-test-score">0</span> / <span id="end-test-attempts">0</span></p>
-            </div>
-        </div>
-
-        <!-- Results Screen -->
-        <div id="results-screen" class="hidden">
-            <div style="color: white; text-align: center; padding: 20px 0;">
-                <button class="back-button" onclick="backToMenu()">←</button>
-                <h2>📊 Performance Results</h2>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h3 class="section-title">📈 Today's Performance</h3>
-                    <div id="performance-list">
-                        <div class="performance-item">
-                            <div>
-                                <div style="font-weight: 500;">Morning Assessment</div>
-                                <div style="font-size: 12px; color: #6b7280;">0/0 correct</div>
-                            </div>
-                            <div class="performance-score score-needs-work">Not Started</div>
-                        </div>
-                        <div class="performance-item">
-                            <div>
-                                <div style="font-weight: 500;">Particle Practice</div>
-                                <div style="font-size: 12px; color: #6b7280;">0/0 correct</div>
-                            </div>
-                            <div class="performance-score score-needs-work">Not Started</div>
-                        </div>
-                        <div class="performance-item">
-                            <div>
-                                <div style="font-weight: 500;">Flashcards</div>
-                                <div style="font-size: 12px; color: #6b7280;">0/0 correct</div>
-                            </div>
-                            <div class="performance-score score-needs-work">Not Started</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h3 class="section-title">📋 Study Report</h3>
-                    <pre id="report-text" style="white-space: pre-wrap; font-family: inherit; font-size: 14px; line-height: 1.6; color: #374151;">STRONG AREAS (75%+): None yet - keep practicing!
-
-NEEDS WORK (<70%): All areas need practice
-
-UNKNOWN WORDS: None collected
-
-CONVERSATIONS: 0 completed today
-
-TOTAL PROGRESS: Genki 1 - Ready to begin assessment</pre>
-                </div>
-            </div>
-            <button class="button button-blue" onclick="generateAnkiCards()" style="margin-top: 16px;">
-                <div>
-                    <div>📚 Generate Anki Cards</div>
-                    <div class="button-info">Export new vocabulary</div>
-                </div>
-                <span>📝</span>
-            </button>
-        </div>
-
-        <div class="loading hidden" id="loading">
-            <h3>Loading today's content...</h3>
-            <p>Please wait while we prepare your daily lessons and exercises.</p>
-        </div>
-    </div>
-
-    <script>
-        // Global State
-        let appState = {
-            currentScreen: 'menu',
-            currentLessonType: '',
-            currentExerciseType: '',
-            currentExercise: 0,
-            currentAssessmentQuestion: 0,
-            currentEndTestQuestion: 0,
-            score: 0,
-            attempts: 0,
-            currentCard: 0,
-            knownCards: 0,
-            totalCardsShown: 0,
-            unknownWords: [],
-            conversationHistory: [],
-            timers: {
-                assessment: null,
-                endTest: null
-            }
-        };
-
-        // Sample lesson content
-        const lessons = {
-            'particles': {
-                title: 'Particles は, を, に - The Foundation of Japanese',
-                content: `
-                    <h3>Key Functions:</h3>
-                    <p><strong>は (wa)</strong> = Topic marker (what/who you're talking about)</p>
-                    <p><strong>を (wo/o)</strong> = Direct object marker (what receives the action)</p>
-                    <p><strong>に (ni)</strong> = Direction, time, indirect object</p>
-                    
-                    <h3>Examples:</h3>
-                    <ul>
-                        <li>私は学生です (I am a student) - 私 is the topic</li>
-                        <li>本を読みます (read a book) - 本 receives the action</li>
-                        <li>学校に行きます (go to school) - に shows direction</li>
-                        <li>友達に本をあげます (give book to friend) - に shows recipient</li>
-                    </ul>
-                    
-                    <h3>Common Mistakes:</h3>
-                    <p>Don't confuse は (topic) with が (subject)!</p>
-                `
-            },
-            'verbs': {
-                title: 'Present and Past Tense Verbs',
-                content: `
-                    <h3>Present Tense (Non-past):</h3>
-                    <ul>
-                        <li>食べます (tabemasu) - eat/will eat</li>
-                        <li>行きます (ikimasu) - go/will go</li>
-                        <li>見ます (mimasu) - watch/will watch</li>
-                    </ul>
-                    
-                    <h3>Past Tense:</h3>
-                    <ul>
-                        <li>食べました (tabemashita) - ate</li>
-                        <li>行きました (ikimashita) - went</li>
-                        <li>見ました (mimashita) - watched</li>
-                    </ul>
-                    
-                    <h3>Negative Forms:</h3>
-                    <ul>
-                        <li>食べません (tabemasen) - don't eat</li>
-                        <li>食べませんでした (tabemasendeshita) - didn't eat</li>
-                    </ul>
-                `
-            }
-        };
-
-        // Sample exercises
-        const exercises = {
-            'particles': {
-                title: 'Particle Practice Drill',
-                questions: [
-                    {
-                        question: '私＿学生です。',
-                        options: ['は', 'を', 'に', 'が'],
-                        correct: 0,
-                        explanation: 'は marks the topic of the sentence. "I am a student."'
-                    },
-                    {
-                        question: '本＿読みます。',
-                        options: ['は', 'を', 'に', 'で'],
-                        correct: 1,
-                        explanation: 'を marks the direct object. "Read a book."'
-                    },
-                    {
-                        question: '学校＿行きます。',
-                        options: ['は', 'を', 'に', 'と'],
-                        correct: 2,
-                        explanation: 'に indicates direction/destination. "Go to school."'
-                    },
-                    {
-                        question: '友達＿プレゼントをあげます。',
-                        options: ['は', 'を', 'に', 'で'],
-                        correct: 2,
-                        explanation: 'に marks the recipient. "Give a present to a friend."'
-                    },
-                    {
-                        question: 'コンピューター＿使います。',
-                        options: ['は', 'を', 'に', 'で'],
-                        correct: 1,
-                        explanation: 'を marks the direct object. "Use a computer."'
-                    }
-                ]
-            },
-            'verbs': {
-                title: 'Verb Conjugation Practice',
-                questions: [
-                    {
-                        question: 'Yesterday I ate sushi. → 昨日、寿司を＿＿＿。',
-                        options: ['食べます', '食べました', '食べません', '食べて'],
-                        correct: 1,
-                        explanation: 'Past tense: 食べました (tabemashita) - ate'
-                    },
-                    {
-                        question: 'I will go to Japan. → 日本に＿＿＿。',
-                        options: ['行きました', '行きます', '行きません', '行って'],
-                        correct: 1,
-                        explanation: 'Present/future tense: 行きます (ikimasu) - go/will go'
-                    },
-                    {
-                        question: 'I didn\'t watch TV. → テレビを＿＿＿。',
-                        options: ['見ます', '見ました', '見ませんでした', '見て'],
-                        correct: 2,
-                        explanation: 'Past negative: 見ませんでした (mimasendeshita) - didn\'t watch'
-                    }
-                ]
-            }
-        };
-
-        // Sample flashcards
-        const flashcards = [
-            { front: '学生', back: 'がくせい (student)' },
-            { front: '先生', back: 'せんせい (teacher)' },
-            { front: '本', back: 'ほん (book)' },
-            { front: '映画', back: 'えいが (movie)' },
-            { front: '音楽', back: 'おんがく (music)' },
-            { front: 'ゲーム', back: 'ゲーム (game)' },
-            { front: 'コンピューター', back: 'コンピューター (computer)' },
-            { front: 'プログラミング', back: 'プログラミング (programming)' },
-            { front: 'エンジニア', back: 'エンジニア (engineer)' },
-            { front: 'ソフトウェア', back: 'ソフトウェア (software)' },
-            { front: '技術', back: 'ぎじゅつ (technology)' },
-            { front: '会社', back: 'かいしゃ (company)' },
-            { front: '仕事', back: 'しごと (work/job)' },
-            { front: '時間', back: 'じかん (time)' },
-            { front: '今日', back: 'きょう (today)' },
-            { front: '昨日', back: 'きのう (yesterday)' },
-            { front: '明日', back: 'あした (tomorrow)' },
-            { front: '食べる', back: 'たべる (to eat)' },
-            { front: '飲む', back: 'のむ (to drink)' },
-            { front: '見る', back: 'みる (to watch/see)' },
-            { front: '聞く', back: 'きく (to listen/hear)' },
-            { front: '読む', back: 'よむ (to read)' },
-            { front: '書く', back: 'かく (to write)' },
-            { front: '行く', back: 'いく (to go)' },
-            { front: '来る', back: 'くる (to come)' }
-        ];
-
-        // Assessment questions
-        const assessmentQuestions = [
-            {
-                question: '私＿学生です。',
-                options: ['は', 'を', 'に', 'が'],
-                correct: 0,
-                explanation: 'は marks the topic of the sentence.'
-            },
-            {
-                question: 'Yesterday I watched a movie. → 昨日、映画を＿＿＿。',
-                options: ['見ます', '見ました', '見ません', '見て'],
-                correct: 1,
-                explanation: 'Past tense: 見ました (mimashita) - watched'
-            },
-            {
-                question: '友達＿プレゼントをあげました。',
-                options: ['は', 'を', 'に', 'で'],
-                correct: 2,
-                explanation: 'に marks the recipient of the action.'
-            }
-        ];
-
-        // Performance tracking
-        let performanceStats = {
-            dailyAssessment: { correct: 0, total: 0, lastScore: 0 },
-            endOfDayTest: { correct: 0, total: 0, lastScore: 0 },
-            flashcards: { correct: 0, total: 0, lastScore: 0 },
-            conversations: { completed: 0, topics: [] }
-        };
-
-        // Screen Management
-        function showScreen(screenId) {
-            document.querySelectorAll('[id$="-screen"]').forEach(screen => {
-                screen.classList.add('hidden');
-            });
-            document.getElementById(screenId).classList.remove('hidden');
-            appState.currentScreen = screenId;
-        }
-
-        function backToMenu() {
-            showScreen('menu-screen');
-            stopAllTimers();
-        }
-
-        // Timer Functions
-        function startTimer(duration, displayId, warningTime = 300) {
-            let timeLeft = duration;
-            const display = document.getElementById(displayId);
-
-            const timer = setInterval(() => {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                display.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-                if (timeLeft <= warningTime) {
-                    display.classList.add('warning');
-                }
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    display.textContent = "Time's Up!";
-                    handleTimeUp();
-                }
-                
-                timeLeft--;
-            }, 1000);
-            
-            return timer;
-        }
-
-        function stopAllTimers() {
-            Object.values(appState.timers).forEach(timer => {
-                if (timer) clearInterval(timer);
-            });
-            appState.timers = {};
-        }
-
-        function handleTimeUp() {
-            alert("Time's up! Your current progress has been saved.");
-            if (appState.currentScreen === 'assessment-screen') {
-                finishAssessment();
-            } else if (appState.currentScreen === 'end-test-screen') {
-                finishEndOfDayTest();
-            }
-        }
-
-        // Assessment Functions
-        function startDailyAssessment() {
-            appState.currentAssessmentQuestion = 0;
-            appState.score = 0;
-            appState.attempts = 0;
-            showScreen('assessment-screen');
-            document.getElementById('assessment-total').textContent = assessmentQuestions.length;
-            document.getElementById('assessment-total-bottom').textContent = assessmentQuestions.length;
-            
-            // Start 25-minute timer
-            appState.timers.assessment = startTimer(1500, 'assessment-timer');
-            loadAssessmentQuestion();
-        }
-
-        function loadAssessmentQuestion() {
-            const question = assessmentQuestions[appState.currentAssessmentQuestion];
-            if (!question) return;
-
-            document.getElementById('assessment-current').textContent = appState.currentAssessmentQuestion + 1;
-            document.getElementById('assessment-question').textContent = question.question;
-
-            const optionsHtml = question.options.map((option, index) =>
-                `<button class="button button-blue" style="margin: 4px 0;" onclick="selectAssessmentAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>`
-            ).join('');
-
-            document.getElementById('assessment-options').innerHTML = optionsHtml;
-            document.getElementById('assessment-result').classList.add('hidden');
-            updateAssessmentProgress();
-        }
-
-        function selectAssessmentAnswer(selectedIndex) {
-            const question = assessmentQuestions[appState.currentAssessmentQuestion];
-            const isCorrect = selectedIndex === question.correct;
-
-            appState.attempts++;
-            if (isCorrect) appState.score++;
-
-            document.getElementById('assessment-explanation').textContent = question.explanation;
-            document.getElementById('assessment-result').classList.remove('hidden');
-            document.getElementById('assessment-result').style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
-            document.getElementById('assessment-result').style.color = isCorrect ? '#166534' : '#991b1b';
-
-            updateAssessmentProgress();
-
-            setTimeout(() => {
-                if (appState.currentAssessmentQuestion < assessmentQuestions.length - 1) {
-                    appState.currentAssessmentQuestion++;
-                    loadAssessmentQuestion();
-                } else {
-                    finishAssessment();
-                }
-            }, 2000);
-        }
-
-        function updateAssessmentProgress() {
-            document.getElementById('assessment-progress').textContent = appState.attempts;
-        }
-
-        function finishAssessment() {
-            stopAllTimers();
-            const finalScore = Math.round((appState.score / appState.attempts) * 100);
-            performanceStats.dailyAssessment.correct = appState.score;
-            performanceStats.dailyAssessment.total = appState.attempts;
-            performanceStats.dailyAssessment.lastScore = finalScore;
-
-            alert(`Assessment Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)`);
-            backToMenu();
-            updateProgressBar();
-        }
-
-        function updateProgressBar() {
-            const progressPercentage = Math.min((performanceStats.dailyAssessment.lastScore || 0), 100);
-            document.getElementById('progress-fill').style.width = progressPercentage + '%';
-        }
-
-        // Lesson Functions
-        function showLesson(lessonType) {
-            appState.currentLessonType = lessonType;
-            const lesson = lessons[lessonType];
-            if (!lesson) {
-                alert('Lesson content not available.');
-                return;
-            }
-
-            document.getElementById('lesson-title').textContent = lesson.title;
-            document.getElementById('lesson-content').innerHTML = lesson.content;
-            showScreen('lesson-screen');
-        }
-
-        function startExerciseFromLesson() {
-            const lessonToExercise = {
-                'particles': 'particles',
-                'verbs': 'verbs',
-                'adjectives': 'adjectives',
-                'time': 'time'
-            };
-            startExercise(lessonToExercise[appState.currentLessonType]);
-        }
-
-        // Exercise Functions
-        function startExercise(type) {
-            if (!exercises[type]) {
-                alert('Exercise not available.');
-                return;
-            }
-            
-            appState.currentExerciseType = type;
-            appState.currentExercise = 0;
-            appState.score = 0;
-            appState.attempts = 0;
-            showScreen('exercise-screen');
-            document.getElementById('exercise-title').textContent = exercises[type].title;
-            document.getElementById('total-q').textContent = exercises[type].questions.length;
-            loadExerciseQuestion();
-        }
-
-        function loadExerciseQuestion() {
-            const exercise = exercises[appState.currentExerciseType];
-            const question = exercise.questions[appState.currentExercise];
-
-            document.getElementById('current-q').textContent = appState.currentExercise + 1;
-            document.getElementById('question-text').textContent = question.question;
-
-            const optionsHtml = question.options.map((option, index) =>
-                `<button class="button button-blue" style="margin: 4px 0;" onclick="selectExerciseAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>`
-            ).join('');
-
-            document.getElementById('options').innerHTML = optionsHtml;
-            document.getElementById('result').classList.add('hidden');
-            updateExerciseScore();
-        }
-
-        function selectExerciseAnswer(selectedIndex) {
-            const exercise = exercises[appState.currentExerciseType];
-            const question = exercise.questions[appState.currentExercise];
-            const isCorrect = selectedIndex === question.correct;
-
-            appState.attempts++;
-            if (isCorrect) appState.score++;
-
-            document.getElementById('explanation').textContent = question.explanation;
-            document.getElementById('result').classList.remove('hidden');
-            document.getElementById('result').style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
-            document.getElementById('result').style.color = isCorrect ? '#166534' : '#991b1b';
-
-            updateExerciseScore();
-
-            setTimeout(() => {
-                if (appState.currentExercise < exercise.questions.length - 1) {
-                    appState.currentExercise++;
-                    loadExerciseQuestion();
-                } else {
-                    const finalScore = Math.round((appState.score / appState.attempts) * 100);
-                    alert(`Exercise Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)`);
-                    backToMenu();
-                }
-            }, 3000);
-        }
-
-        function updateExerciseScore() {
-            document.getElementById('score').textContent = appState.score;
-            document.getElementById('attempts').textContent = appState.attempts;
-        }
-
-        // Conversation Functions
-        function startConversation() {
-            const topics = ['Technology & Work', 'Film & Entertainment', 'Video Games', 'AI & Engineering', 'Japanese Culture'];
-            const topic = topics[Math.floor(Math.random() * topics.length)];
-            document.getElementById('conversation-topic').textContent = `Tonight's topic: ${topic}`;
-            showScreen('conversation-screen');
-            appState.conversationHistory = [];
-        }
-
-        function sendConversationMessage() {
-            const input = document.getElementById('conversation-input');
-            const message = input.value.trim();
-            if (!message) return;
-
-            // Add user message
-            addConversationBubble(message, 'user');
-            input.value = '';
-
-            // Simulate AI response
-            setTimeout(() => {
-                const responses = [
-                    "それは面白いですね！もっと詳しく教えてください。",
-                    "すごいですね！私も同じことを考えていました。",
-                    "なるほど、とても勉強になります。",
-                    "それについてどう思いますか？"
-                ];
-                const response = responses[Math.floor(Math.random() * responses.length)];
-                addConversationBubble(response, 'ai');
-            }, 1000);
-        }
-
-        function addConversationBubble(message, sender) {
-            const area = document.getElementById('conversation-area');
-            const bubble = document.createElement('div');
-            bubble.className = `conversation-bubble ${sender}`;
-            bubble.textContent = message;
-            area.appendChild(bubble);
-            area.scrollTop = area.scrollHeight;
-            
-            appState.conversationHistory.push({ sender, message });
-            performanceStats.conversations.completed++;
-        }
-
-        // Flashcard Functions
-        function startFlashcards() {
-            appState.currentCard = 0;
-            appState.knownCards = 0;
-            appState.totalCardsShown = 0;
-            showScreen('flashcard-screen');
-            document.getElementById('total-flashcards').textContent = flashcards.length;
-            loadFlashcard();
-        }
-
-        function loadFlashcard() {
-            const card = flashcards[appState.currentCard];
-            if (!card) return;
-
-            document.getElementById('card-num').textContent = appState.currentCard + 1;
-            document.getElementById('card-front').textContent = card.front;
-            document.getElementById('card-back').textContent = card.back;
-            document.getElementById('card-back').classList.add('hidden');
-            document.getElementById('card-buttons').classList.add('hidden');
-            document.getElementById('reveal-btn').classList.remove('hidden');
-            updateFlashcardStats();
-        }
-
-        function revealCard() {
-            document.getElementById('card-back').classList.remove('hidden');
-            document.getElementById('card-buttons').classList.remove('hidden');
-            document.getElementById('reveal-btn').classList.add('hidden');
-        }
-
-        function nextFlashcard(known) {
-            appState.totalCardsShown++;
-            if (known) appState.knownCards++;
-
-            if (appState.currentCard < flashcards.length - 1) {
-                appState.currentCard++;
-                loadFlashcard();
-            } else {
-                const finalScore = Math.round((appState.knownCards / appState.totalCardsShown) * 100);
-                performanceStats.flashcards.correct = appState.knownCards;
-                performanceStats.flashcards.total = appState.totalCardsShown;
-                performanceStats.flashcards.lastScore = finalScore;
-                alert(`Flashcards Complete! You knew ${appState.knownCards}/${appState.totalCardsShown} cards (${finalScore}%)`);
-                backToMenu();
-            }
-        }
-
-        function updateFlashcardStats() {
-            document.getElementById('known-count').textContent = appState.knownCards;
-            document.getElementById('total-cards').textContent = appState.totalCardsShown;
-        }
-
-        // Unknown Words Functions
-        function addUnknownWord() {
-            const input = document.getElementById('new-word-input');
-            const word = input.value.trim();
-            if (word && !appState.unknownWords.includes(word)) {
-                appState.unknownWords.push(word);
-                input.value = '';
-                updateUnknownWordsDisplay();
-            }
-        }
-
-        function removeUnknownWord(index) {
-            appState.unknownWords.splice(index, 1);
-            updateUnknownWordsDisplay();
-        }
-
-        function updateUnknownWordsDisplay() {
-            const container = document.getElementById('unknown-words-display');
-            if (appState.unknownWords.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
-            const wordsHtml = appState.unknownWords.map((word, index) =>
-                `<span class="word-tag">${word}<button onclick="removeUnknownWord(${index})">×</button></span>`
-            ).join('');
-
-            container.innerHTML = `
-                <p style="font-size: 14px; font-weight: 500; margin: 8px 0;">Collected words (${appState.unknownWords.length}):</p>
-                <div style="max-height: 80px; overflow-y: auto; margin-bottom: 8px;">${wordsHtml}</div>
-            `;
-        }
-
-        // Results Functions
-        function showResults() {
-            updatePerformanceDisplay();
-            showScreen('results-screen');
-        }
-
-        function updatePerformanceDisplay() {
-            // This would be populated with actual performance data
-            // For now, keeping the static display
-        }
-
-        // End of Day Test
-        function startEndOfDayTest() {
-            alert('End of day test will use questions from today\'s weak areas. Coming soon!');
-        }
-
-        // Export Functions
-        function generateAnkiCards() {
-            if (flashcards.length === 0) {
-                alert('No flashcards available to export.');
-                return;
-            }
-
-            let ankiText = '';
-            flashcards.forEach(card => {
-                ankiText += `${card.front}, ${card.back};\n`;
-            });
-
-            // Add unknown words
-            appState.unknownWords.forEach(word => {
-                ankiText += `${word}, (Unknown - needs definition);\n`;
-            });
-
-            navigator.clipboard.writeText(ankiText).then(() => {
-                alert('Anki cards copied to clipboard! Paste into Anki import.');
-            }).catch(() => {
-                alert(`Anki Cards:\n\n${ankiText}`);
-            });
-        }
-
-        function prepareForTomorrow() {
-            alert('Progress exported! Ready for tomorrow\'s study session.');
-        }
-
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('new-word-input').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    addUnknownWord();
-                }
-            });
-
-            document.getElementById('conversation-input').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendConversationMessage();
-                }
-            });
-        });
-
-        // Initialize app
-        window.addEventListener('load', () => {
-            console.log('🇯🇵 Mellow\'s Nihongo App Loaded Successfully!');
-        });
-    </script>
+<div class="container">
+<!-- Configuration Panel (Admin Only) -->
+<div id="config-panel" class="config-panel hidden">
+<h4>📅 Daily Configuration</h4>
+<button class="button button-orange" onclick="loadTodaysConfig()">
+Load Today's Content
+</button>
+<button class="button button-teal" onclick="exportProgress()">
+Export Progress Data
+</button>
+</div>
+
+<!-- Menu Screen -->
+<div id="menu-screen">
+<div class="header">
+<h1>🇯🇵 Mellow's Nihongo</h1>
+<p id="header-text">Loading...</p>
+<div class="achievement-card">
+<div class="achievement-header">
+<span>Today's Target Areas</span>
+<span id="target-count">Loading...</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+</div>
+<div class="achievement-stats">
+<span>🎯 Focus on weak areas</span>
+<span>📈 Improve to 75%+</span>
+</div>
+</div>
+</div>
+
+<!-- Daily Assessment -->
+<button class="button button-green" onclick="startDailyAssessment()">
+<div>
+<div>📝 Morning Assessment</div>
+<div class="button-info">15-20 questions • 25 min timer</div>
+</div>
+<span>⏰</span>
+</button>
+
+<!-- Priority Lessons Section -->
+<div class="card">
+<div class="card-content">
+<h3 class="section-title">🚨 Priority Study Areas</h3>
+<div id="priority-lessons">
+Loading lessons...
+</div>
+</div>
+</div>
+
+<!-- Practice Exercises -->
+<h3 style="color: white; margin: 16px 0 8px 0;">🎯 Targeted Practice</h3>
+<div id="practice-exercises">
+Loading exercises...
+</div>
+
+<!-- Conversation Practice -->
+<button class="button button-purple" onclick="startConversation()">
+<div>
+<div>🗣️ Izakaya Conversation Practice</div>
+<div class="button-info">Role-play • Film, tech, work topics</div>
+</div>
+<span>🍻</span>
+</button>
+
+<!-- Flashcards -->
+<button class="button button-teal" onclick="startFlashcards()">
+<div>
+<div id="flashcard-title">🗂️ Chapter Flashcards</div>
+<div class="button-info" id="flashcard-info">Loading...</div>
+</div>
+<span>⭐</span>
+</button>
+
+<!-- Results Tab -->
+<button class="button button-gray" onclick="showResults()">
+<div>
+<div>📊 Performance Results</div>
+<div class="button-info">Track your progress</div>
+</div>
+<span>📈</span>
+</button>
+
+<!-- Unknown Words Collection -->
+<div class="card">
+<div class="card-content">
+<h3 class="section-title">⭐ Unknown Words Collection</h3>
+<div class="input-group">
+<input type="text" id="new-word-input" class="text-input" placeholder="Add unknown word/kanji...">
+<button class="button button-blue" style="width: auto; margin: 0; padding: 8px 16px;" onclick="addUnknownWord()">Add</button>
+</div>
+<div id="unknown-words-display"></div>
+<p style="font-size: 12px; color: #6b7280; margin-top: 8px;">💡 Copy this list for your next assessment</p>
+</div>
+</div>
+
+<!-- End of Day Test -->
+<button class="button button-orange" onclick="startEndOfDayTest()">
+<div>
+<div>🌅 End of Day Review Test</div>
+<div class="button-info">20 questions • 25 min timer</div>
+</div>
+<span>🏆</span>
+</button>
+
+<!-- Ready for Tomorrow -->
+<button class="button button-green" onclick="prepareForTomorrow()">
+<div>
+<div>📅 Ready for Tomorrow?</div>
+<div class="button-info">Export today's progress</div>
+</div>
+<span>🔄</span>
+</button>
+</div>
+
+<!-- Daily Assessment Screen -->
+<div id="assessment-screen" class="hidden">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2>📝 Morning Assessment</h2>
+<div class="timer-display" id="assessment-timer">25:00</div>
+<p>Question <span id="assessment-current">1</span> of <span id="assessment-total">20</span></p>
+</div>
+<div class="card" style="margin: 20px 0;">
+<div class="card-content" style="text-align: center;">
+<h3 id="assessment-question" style="font-size: 20px; margin-bottom: 30px;">Loading...</h3>
+<div id="assessment-options"></div>
+<div id="assessment-result" class="hidden" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
+<p id="assessment-explanation"></p>
+</div>
+</div>
+</div>
+<div style="text-align: center; color: white;">
+<p>Progress: <span id="assessment-progress">0</span> / <span id="assessment-total-bottom">20</span></p>
+</div>
+</div>
+
+<!-- Lesson Screen -->
+<div id="lesson-screen" class="hidden">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2 id="lesson-title">Lesson</h2>
+</div>
+<div class="card">
+<div class="card-content">
+<div id="lesson-content" class="lesson-content">
+Loading lesson...
+</div>
+</div>
+</div>
+<button class="button button-blue" onclick="startExerciseFromLesson()" style="margin-top: 16px;">
+Practice This Topic
+</button>
+</div>
+
+<!-- Exercise Screen -->
+<div id="exercise-screen" class="hidden">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2 id="exercise-title">Exercise</h2>
+<p>Question <span id="current-q">1</span> of <span id="total-q">10</span></p>
+</div>
+<div class="card" style="margin: 20px 0;">
+<div class="card-content" style="text-align: center;">
+<h3 id="question-text" style="font-size: 24px; margin-bottom: 30px;">Loading...</h3>
+<div id="options"></div>
+<div id="result" class="hidden" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
+<p id="explanation"></p>
+</div>
+</div>
+</div>
+<div style="text-align: center; color: white;">
+<p>Score: <span id="score">0</span> / <span id="attempts">0</span></p>
+</div>
+</div>
+
+<!-- Conversation Screen -->
+<div id="conversation-screen" class="hidden conversation-screen">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2>🗣️ Izakaya Chat</h2>
+<p id="conversation-topic">Tonight's topic: Film & Technology</p>
+</div>
+<div id="conversation-area" style="padding-bottom: 80px; height: calc(100vh - 120px); overflow-y: auto;">
+<div class="conversation-bubble ai">
+こんばんは！いらっしゃいませ！今日はどんなお仕事をされているんですか？
+<br><small style="opacity: 0.7;">(Good evening! Welcome! What kind of work do you do?)</small>
+</div>
+</div>
+<div class="conversation-input">
+<input type="text" id="conversation-input" placeholder="Type your response in Japanese...">
+<button onclick="sendConversationMessage()">Send</button>
+</div>
+</div>
+
+<!-- Flashcard Screen -->
+<div id="flashcard-screen" class="hidden">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2 id="flashcard-screen-title">🗂️ Chapter Flashcards</h2>
+<p>Card <span id="card-num">1</span> of <span id="total-flashcards">25</span></p>
+</div>
+<div class="card" style="margin: 20px 0; min-height: 300px;">
+<div class="card-content" style="text-align: center; display: flex; flex-direction: column; justify-content: center; height: 280px;">
+<div id="card-front" style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">Loading...</div>
+<div id="card-back" class="hidden" style="font-size: 20px; color: #3b82f6; margin-bottom: 30px;">Loading...</div>
+<div id="card-buttons" class="hidden" style="display: flex; gap: 10px;">
+<button class="button button-red" style="margin: 0; flex: 1;" onclick="nextFlashcard(false)">❌ Don't Know</button>
+<button class="button button-green" style="margin: 0; flex: 1;" onclick="nextFlashcard(true)">✅ Know It</button>
+</div>
+<button id="reveal-btn" class="button button-blue" style="margin: 0;" onclick="revealCard()">Reveal Answer</button>
+</div>
+</div>
+<div style="text-align: center; color: white;">
+<p>Known: <span id="known-count">0</span> / <span id="total-cards">0</span></p>
+</div>
+</div>
+
+<!-- End of Day Test Screen -->
+<div id="end-test-screen" class="hidden">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2>🌅 End of Day Review</h2>
+<div class="timer-display" id="end-test-timer">25:00</div>
+<p>Question <span id="end-test-current">1</span> of <span id="end-test-total">20</span></p>
+</div>
+<div class="card" style="margin: 20px 0;">
+<div class="card-content" style="text-align: center;">
+<h3 id="end-test-question" style="font-size: 20px; margin-bottom: 30px;">Loading...</h3>
+<div id="end-test-options"></div>
+<div id="end-test-result" class="hidden" style="margin-top: 20px; padding: 16px; background: #f0f9ff; border-radius: 8px;">
+<p id="end-test-explanation"></p>
+</div>
+</div>
+</div>
+<div style="text-align: center; color: white;">
+<p>Score: <span id="end-test-score">0</span> / <span id="end-test-attempts">0</span></p>
+</div>
+</div>
+
+<!-- Results Screen -->
+<div id="results-screen" class="hidden">
+<div style="color: white; text-align: center; padding: 20px 0;">
+<button class="back-button" onclick="backToMenu()">←</button>
+<h2>📊 Performance Results</h2>
+</div>
+<div class="card">
+<div class="card-content">
+<h3 class="section-title">📈 Today's Performance</h3>
+<div id="performance-list">
+<!-- Performance stats will be loaded here -->
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-content">
+<h3 class="section-title">📋 Study Report</h3>
+<pre id="report-text" style="white-space: pre-wrap; font-family: inherit; font-size: 14px; line-height: 1.6; color: #374151;"></pre>
+</div>
+</div>
+<button class="button button-blue" onclick="generateAnkiCards()" style="margin-top: 16px;">
+<div>
+<div>📚 Generate Anki Cards</div>
+<div class="button-info">Export new vocabulary</div>
+</div>
+<span>📄</span>
+</button>
+</div>
+
+<div class="loading hidden" id="loading">
+<h3>Loading today's content...</h3>
+<p>Please wait while we fetch your daily lessons and exercises.</p>
+</div>
+</div>
+
+<script>
+// =====================================================
+// 🤖 AUTOMATED CONTENT SYSTEM
+// =====================================================
+
+// This system automatically loads daily content from external sources
+// No more manual updates needed!
+
+// Global State
+let dailyConfig = {};
+let currentContent = {};
+let appState = {
+currentScreen: 'menu',
+currentLessonType: '',
+currentExerciseType: '',
+currentExercise: 0,
+currentAssessmentQuestion: 0,
+currentEndTestQuestion: 0,
+score: 0,
+attempts: 0,
+currentCard: 0,
+knownCards: 0,
+totalCardsShown: 0,
+unknownWords: [],
+conversationHistory: [],
+timers: {
+assessment: null,
+endTest: null
+}
+};
+
+// Performance Tracking
+let performanceStats = {
+dailyAssessment: { correct: 0, total: 0, lastScore: 0 },
+endOfDayTest: { correct: 0, total: 0, lastScore: 0 },
+flashcards: { correct: 0, total: 0, lastScore: 0 },
+conversations: { completed: 0, topics: [] }
+};
+
+// Content Loading System
+async function loadTodaysConfig() {
+showLoading(true);
+try {
+// In a real implementation, this would fetch from Google Sheets, GitHub, or another API
+// For now, we'll simulate loading with default content
+await simulateContentLoad();
+updateUI();
+showLoading(false);
+} catch (error) {
+console.error('Failed to load daily config:', error);
+loadFallbackContent();
+showLoading(false);
+}
+}
+
+async function simulateContentLoad() {
+// REPLACE THIS ENTIRE FUNCTION WITH REAL GOOGLE SHEETS DATA
+try {
+// 🔗 REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYY56p6ew_1Mo2RYP_ZHrvRSy2ywRdPzgvlQ18LXvi8mJ7Lvh_J599aHtqWICi8cWGbg/exec';
+
+console.log('📡 Fetching data from Google Sheets...');
+const response = await fetch(GOOGLE_SCRIPT_URL);
+
+if (!response.ok) {
+throw new Error(`HTTP error! status: ${response.status}`);
+}
+
+const data = await response.json();
+console.log('✅ Data loaded from Google Sheets:', data);
+
+// Map Google Sheets data to app format
+dailyConfig = {
+date: new Date().toLocaleDateString(),
+chapter: data.dailyConfig.chapter || 9,
+assessmentScore: data.dailyConfig.assessment_score || 61,
+headerText: data.dailyConfig.header_text || "Chapter 9 Focus",
+targetAreas: data.dailyConfig.target_areas || 4,
+conversationTopics: [
+data.dailyConfig.conversation_topic_1 || "General Conversation",
+data.dailyConfig.conversation_topic_2 || "Technology",
+data.dailyConfig.conversation_topic_3 || "Japanese Culture"
+],
+masteryThreshold: data.dailyConfig.mastery_threshold || 75,
+timerAssessment: data.dailyConfig.timer_assessment || 1500,
+timerEndTest: data.dailyConfig.timer_end_test || 1500
+};
+
+// Use real content from Google Sheets
+currentContent = {
+lessons: data.lessons || {},
+exercises: data.exercises || {},
+assessmentQuestions: data.assessmentQuestions || [],
+endOfDayQuestions: data.endTestQuestions || [],
+flashcards: data.flashcards || [],
+conversationPrompts: data.conversationPrompts || [],
+ankiExport: data.ankiExport || ''
+};
+
+console.log('🎯 Content loaded:', {
+lessons: Object.keys(currentContent.lessons).length,
+exercises: Object.keys(currentContent.exercises).length,
+assessmentQuestions: currentContent.assessmentQuestions.length,
+flashcards: currentContent.flashcards.length
+});
+
+} catch (error) {
+console.error('❌ Failed to load from Google Sheets:', error);
+// Fall back to mock data if Google Sheets fails
+console.log('🔄 Using fallback content...');
+await simulateContentLoadFallback();
+}
+}
+
+async function simulateContentLoadFallback() {
+// Fallback mock data (original function content)
+await new Promise(resolve => setTimeout(resolve, 1000));
+
+dailyConfig = {
+date: new Date().toLocaleDateString(),
+chapter: 9,
+assessmentScore: 61,
+headerText: "Chapter 9 Focus - Assessment Score: 61%",
+targetAreas: 4,
+conversationTopics: [
+"Film and Technology in Japan",
+"Working as a Software Engineer", 
+"AI Development and Ethics",
+"Favorite Video Games"
+]
+};
+
+currentContent = {
+lessons: {
+'tai-vs-tagaru': {
+title: 'たい vs たがる Forms: Your Desires vs Others\' Desires',
+content: generateLessonContent('tai-vs-tagaru')
+},
+'kedo-vs-node': {
+title: 'けど vs ので: When to Show Contrast vs Reason',
+content: generateLessonContent('kedo-vs-node')
+}
+},
+exercises: {
+'tai-tagaru': generateExercise('tai-tagaru'),
+'kedo-node': generateExercise('kedo-node')
+},
+assessmentQuestions: generateAssessmentQuestions(),
+endOfDayQuestions: generateEndOfDayQuestions(),
+flashcards: generateFlashcards(),
+ankiExport: ''
+};
+}
+
+function loadFallbackContent() {
+// Fallback content if loading fails
+dailyConfig = {
+date: new Date().toLocaleDateString(),
+chapter: 9,
+assessmentScore: 70,
+headerText: "Chapter 9 - Assessment Loading...",
+targetAreas: 2,
+conversationTopics: ["General Conversation"]
+};
+
+currentContent = {
+lessons: {},
+exercises: {},
+assessmentQuestions: [],
+endOfDayQuestions: [],
+flashcards: [],
+ankiExport: ''
+};
+}
+
+function updateUI() {
+// Update header
+document.getElementById('header-text').textContent = dailyConfig.headerText;
+document.getElementById('target-count').textContent = dailyConfig.targetAreas + ' topics';
+
+// Update progress bar
+const progressPercentage = Math.min((performanceStats.dailyAssessment.lastScore || 0), 100);
+document.getElementById('progress-fill').style.width = progressPercentage + '%';
+
+// Update flashcard info
+document.getElementById('flashcard-title').textContent = `🗂️ Chapter ${dailyConfig.chapter} Flashcards`;
+document.getElementById('flashcard-info').textContent = `${currentContent.flashcards.length} cards • New vocab added`;
+
+updatePriorityLessons();
+updatePracticeExercises();
+}
+
+function updatePriorityLessons() {
+const container = document.getElementById('priority-lessons');
+if (!currentContent.lessons) {
+container.innerHTML = '<p>No lessons available today.</p>';
+return;
+}
+
+let lessonsHtml = '';
+Object.keys(currentContent.lessons).forEach(lessonKey => {
+const lesson = currentContent.lessons[lessonKey];
+lessonsHtml += `
+<button class="lesson-button priority" onclick="showLesson('${lessonKey}')">
+<span>${lesson.title} <span class="priority-badge">FOCUS</span></span>
+<span>›</span>
+</button>
+`;
+});
+container.innerHTML = lessonsHtml;
+}
+
+function updatePracticeExercises() {
+const container = document.getElementById('practice-exercises');
+if (!currentContent.exercises) {
+container.innerHTML = '<p>No exercises available today.</p>';
+return;
+}
+
+let exercisesHtml = '';
+Object.keys(currentContent.exercises).forEach(exerciseKey => {
+const exercise = currentContent.exercises[exerciseKey];
+const colors = ['red', 'orange', 'purple', 'pink'];
+const colorIndex = Object.keys(currentContent.exercises).indexOf(exerciseKey) % colors.length;
+exercisesHtml += `
+<button class="button button-${colors[colorIndex]}" onclick="startExercise('${exerciseKey}')">
+<div>
+<div>${exercise.title}</div>
+<div class="button-info">${exercise.questions.length} questions • Focus practice</div>
+</div>
+<span>🔥</span>
+</button>
+`;
+});
+container.innerHTML = exercisesHtml;
+}
+
+// Screen Management
+function showScreen(screenId) {
+document.querySelectorAll('[id$="-screen"]').forEach(screen => {
+screen.classList.add('hidden');
+});
+document.getElementById(screenId).classList.remove('hidden');
+appState.currentScreen = screenId;
+}
+
+function showLoading(show) {
+document.getElementById('loading').classList.toggle('hidden', !show);
+document.getElementById('menu-screen').classList.toggle('hidden', show);
+}
+
+function backToMenu() {
+showScreen('menu-screen');
+stopAllTimers();
+}
+
+// Timer Functions
+function startTimer(duration, displayId, warningTime = 300) {
+let timeLeft = duration;
+const display = document.getElementById(displayId);
+
+const timer = setInterval(() => {
+const minutes = Math.floor(timeLeft / 60);
+const seconds = timeLeft % 60;
+display.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+if (timeLeft <= warningTime) {
+display.classList.add('warning');
+}
+        
+if (timeLeft <= 0) {
+clearInterval(timer);
+display.textContent = "Time's Up!";
+handleTimeUp();
+}
+        
+timeLeft--;
+}, 1000);
+    
+return timer;
+}
+
+function stopAllTimers() {
+Object.values(appState.timers).forEach(timer => {
+if (timer) clearInterval(timer);
+});
+appState.timers = {};
+}
+
+function handleTimeUp() {
+alert("Time's up! Your current progress has been saved.");
+if (appState.currentScreen === 'assessment-screen') {
+finishAssessment();
+} else if (appState.currentScreen === 'end-test-screen') {
+finishEndOfDayTest();
+}
+}
+
+// Assessment Functions
+function startDailyAssessment() {
+if (!currentContent.assessmentQuestions || currentContent.assessmentQuestions.length === 0) {
+alert('Assessment questions not loaded yet. Please try again.');
+return;
+}
+    
+appState.currentAssessmentQuestion = 0;
+appState.score = 0;
+appState.attempts = 0;
+showScreen('assessment-screen');
+document.getElementById('assessment-total').textContent = currentContent.assessmentQuestions.length;
+document.getElementById('assessment-total-bottom').textContent = currentContent.assessmentQuestions.length;
+    
+// Start 25-minute timer
+appState.timers.assessment = startTimer(1500, 'assessment-timer'); // 25 minutes = 1500 seconds
+loadAssessmentQuestion();
+}
+
+function loadAssessmentQuestion() {
+const question = currentContent.assessmentQuestions[appState.currentAssessmentQuestion];
+if (!question) return;
+
+document.getElementById('assessment-current').textContent = appState.currentAssessmentQuestion + 1;
+document.getElementById('assessment-question').textContent = question.question;
+
+const optionsHtml = question.options.map((option, index) =>
+`<button class="button button-blue" style="margin: 4px 0;" onclick="selectAssessmentAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>`
+).join('');
+
+document.getElementById('assessment-options').innerHTML = optionsHtml;
+document.getElementById('assessment-result').classList.add('hidden');
+updateAssessmentProgress();
+}
+
+function selectAssessmentAnswer(selectedIndex) {
+const question = currentContent.assessmentQuestions[appState.currentAssessmentQuestion];
+const isCorrect = selectedIndex === question.correct;
+
+appState.attempts++;
+if (isCorrect) appState.score++;
+
+document.getElementById('assessment-explanation').textContent = question.explanation;
+document.getElementById('assessment-result').classList.remove('hidden');
+document.getElementById('assessment-result').style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
+document.getElementById('assessment-result').style.color = isCorrect ? '#166534' : '#991b1b';
+
+updateAssessmentProgress();
+
+setTimeout(() => {
+if (appState.currentAssessmentQuestion < currentContent.assessmentQuestions.length - 1) {
+appState.currentAssessmentQuestion++;
+loadAssessmentQuestion();
+} else {
+finishAssessment();
+}
+}, 2000);
+}
+
+function updateAssessmentProgress() {
+document.getElementById('assessment-progress').textContent = appState.attempts;
+}
+
+function finishAssessment() {
+stopAllTimers();
+const finalScore = Math.round((appState.score / appState.attempts) * 100);
+performanceStats.dailyAssessment.correct = appState.score;
+performanceStats.dailyAssessment.total = appState.attempts;
+performanceStats.dailyAssessment.lastScore = finalScore;
+
+alert(`Assessment Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)`);
+backToMenu();
+updateUI(); // Refresh progress bar
+}
+
+// End of Day Test Functions
+function startEndOfDayTest() {
+if (!currentContent.endOfDayQuestions || currentContent.endOfDayQuestions.length === 0) {
+alert('End of day questions not loaded yet. Please try again.');
+return;
+}
+    
+appState.currentEndTestQuestion = 0;
+appState.score = 0;
+appState.attempts = 0;
+showScreen('end-test-screen');
+document.getElementById('end-test-total').textContent = currentContent.endOfDayQuestions.length;
+    
+// Start 25-minute timer
+appState.timers.endTest = startTimer(1500, 'end-test-timer');
+loadEndTestQuestion();
+}
+
+function loadEndTestQuestion() {
+const question = currentContent.endOfDayQuestions[appState.currentEndTestQuestion];
+if (!question) return;
+
+document.getElementById('end-test-current').textContent = appState.currentEndTestQuestion + 1;
+document.getElementById('end-test-question').textContent = question.question;
+
+const optionsHtml = question.options.map((option, index) =>
+`<button class="button button-blue" style="margin: 4px 0;" onclick="selectEndTestAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>`
+).join('');
+
+document.getElementById('end-test-options').innerHTML = optionsHtml;
+document.getElementById('end-test-result').classList.add('hidden');
+updateEndTestProgress();
+}
+
+function selectEndTestAnswer(selectedIndex) {
+const question = currentContent.endOfDayQuestions[appState.currentEndTestQuestion];
+const isCorrect = selectedIndex === question.correct;
+
+appState.attempts++;
+if (isCorrect) appState.score++;
+
+document.getElementById('end-test-explanation').textContent = question.explanation;
+document.getElementById('end-test-result').classList.remove('hidden');
+document.getElementById('end-test-result').style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
+document.getElementById('end-test-result').style.color = isCorrect ? '#166534' : '#991b1b';
+
+updateEndTestProgress();
+
+setTimeout(() => {
+if (appState.currentEndTestQuestion < currentContent.endOfDayQuestions.length - 1) {
+appState.currentEndTestQuestion++;
+loadEndTestQuestion();
+} else {
+finishEndOfDayTest();
+}
+}, 2000);
+}
+
+function updateEndTestProgress() {
+document.getElementById('end-test-score').textContent = appState.score;
+document.getElementById('end-test-attempts').textContent = appState.attempts;
+}
+
+function finishEndOfDayTest() {
+stopAllTimers();
+const finalScore = Math.round((appState.score / appState.attempts) * 100);
+performanceStats.endOfDayTest.correct = appState.score;
+performanceStats.endOfDayTest.total = appState.attempts;
+performanceStats.endOfDayTest.lastScore = finalScore;
+
+// Identify wrong answers for tomorrow's carryover
+const wrongQuestions = [];
+currentContent.endOfDayQuestions.forEach((q, index) => {
+// This would need tracking of actual answers in a real implementation
+if (Math.random() < 0.3) { // Simulate some wrong answers
+wrongQuestions.push(q);
+}
+});
+
+alert(`End of Day Test Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)\n${wrongQuestions.length} questions will carry over to tomorrow.`);
+backToMenu();
+}
+
+// Lesson Functions
+function showLesson(lessonType) {
+appState.currentLessonType = lessonType;
+const lesson = currentContent.lessons[lessonType];
+if (!lesson) {
+alert('Lesson content not available.');
+return;
+}
+
+document.getElementById('lesson-title').textContent = lesson.title;
+document.getElementById('lesson-content').innerHTML = lesson.content;
+showScreen('lesson-screen');
+}
+
+function startExerciseFromLesson() {
+const lessonToExercise = {
+'tai-vs-tagaru': 'tai-tagaru',
+'kedo-vs-node': 'kedo-node'
+};
+startExercise(lessonToExercise[appState.currentLessonType]);
+}
+
+// Exercise Functions
+function startExercise(type) {
+if (!currentContent.exercises[type]) {
+alert('Exercise not available.');
+return;
+}
+    
+appState.currentExerciseType = type;
+appState.currentExercise = 0;
+appState.score = 0;
+appState.attempts = 0;
+showScreen('exercise-screen');
+document.getElementById('exercise-title').textContent = currentContent.exercises[type].title;
+document.getElementById('total-q').textContent = currentContent.exercises[type].questions.length;
+loadExerciseQuestion();
+}
+
+function loadExerciseQuestion() {
+const exercise = currentContent.exercises[appState.currentExerciseType];
+const question = exercise.questions[appState.currentExercise];
+
+document.getElementById('current-q').textContent = appState.currentExercise + 1;
+document.getElementById('question-text').textContent = question.question;
+
+const optionsHtml = question.options.map((option, index) =>
+`<button class="button button-blue" style="margin: 4px 0;" onclick="selectExerciseAnswer(${index})">${String.fromCharCode(65 + index)}) ${option}</button>`
+).join('');
+
+document.getElementById('options').innerHTML = optionsHtml;
+document.getElementById('result').classList.add('hidden');
+updateExerciseScore();
+}
+
+function selectExerciseAnswer(selectedIndex) {
+const exercise = currentContent.exercises[appState.currentExerciseType];
+const question = exercise.questions[appState.currentExercise];
+const isCorrect = selectedIndex === question.correct;
+
+appState.attempts++;
+if (isCorrect) appState.score++;
+
+document.getElementById('explanation').textContent = question.explanation;
+document.getElementById('result').classList.remove('hidden');
+document.getElementById('result').style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
+document.getElementById('result').style.color = isCorrect ? '#166534' : '#991b1b';
+
+updateExerciseScore();
+
+setTimeout(() => {
+if (appState.currentExercise < exercise.questions.length - 1) {
+appState.currentExercise++;
+loadExerciseQuestion();
+} else {
+const finalScore = Math.round((appState.score / appState.attempts) * 100);
+alert(`Exercise Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)`);
+backToMenu();
+}
+}, 3000);
+}
+
+function updateExerciseScore() {
+document.getElementById('score').textContent = appState.score;
+document.getElementById('attempts').textContent = appState.attempts;
+}
+
+// Conversation Functions
+function startConversation() {
+const topics = dailyConfig.conversationTopics || ['General Conversation'];
+const topic = topics[Math.floor(Math.random() * topics.length)];
+document.getElementById('conversation-topic').textContent = `Tonight's topic: ${topic}`;
+showScreen('conversation-screen');
+appState.conversationHistory = [];
+}
+
+function sendConversationMessage() {
+const input = document.getElementById('conversation-input');
+const message = input.value.trim();
+if (!message) return;
+
+// Add user message
+addConversationBubble(message, 'user');
+input.value = '';
+
+// Simulate AI response (in real implementation, this would call an AI service)
+setTimeout(() => {
+const responses = [
+"それは面白いですね！もっと詳しく教えてください。",
+"すごいですね！私も同じことを考えていました。",
+"なるほど、とても勉強になります。",
+"それについてどう思いますか？"
+];
+const response = responses[Math.floor(Math.random() * responses.length)];
+addConversationBubble(response, 'ai');
+}, 1000);
+}
+
+function addConversationBubble(message, sender) {
+const area = document.getElementById('conversation-area');
+const bubble = document.createElement('div');
+bubble.className = `conversation-bubble ${sender}`;
+bubble.textContent = message;
+area.appendChild(bubble);
+area.scrollTop = area.scrollHeight;
+    
+appState.conversationHistory.push({ sender, message });
+performanceStats.conversations.completed++;
+}
+
+// Flashcard Functions
+function startFlashcards() {
+if (!currentContent.flashcards || currentContent.flashcards.length === 0) {
+alert('Flashcards not loaded yet. Please try again.');
+return;
+}
+    
+appState.currentCard = 0;
+appState.knownCards = 0;
+appState.totalCardsShown = 0;
+showScreen('flashcard-screen');
+document.getElementById('total-flashcards').textContent = currentContent.flashcards.length;
+loadFlashcard();
+}
+
+function loadFlashcard() {
+const card = currentContent.flashcards[appState.currentCard];
+if (!card) return;
+
+document.getElementById('card-num').textContent = appState.currentCard + 1;
+document.getElementById('card-front').textContent = card.front;
+document.getElementById('card-back').textContent = card.back;
+document.getElementById('card-back').classList.add('hidden');
+document.getElementById('card-buttons').classList.add('hidden');
+document.getElementById('reveal-btn').classList.remove('hidden');
+updateFlashcardStats();
+}
+
+function revealCard() {
+document.getElementById('card-back').classList.remove('hidden');
+document.getElementById('card-buttons').classList.remove('hidden');
+document.getElementById('reveal-btn').classList.add('hidden');
+}
+
+function nextFlashcard(known) {
+appState.totalCardsShown++;
+if (known) appState.knownCards++;
+
+if (appState.currentCard < currentContent.flashcards.length - 1) {
+appState.currentCard++;
+loadFlashcard();
+} else {
+const finalScore = Math.round((appState.knownCards / appState.totalCardsShown) * 100);
+performanceStats.flashcards.correct = appState.knownCards;
+performanceStats.flashcards.total = appState.totalCardsShown;
+performanceStats.flashcards.lastScore = finalScore;
+alert(`Flashcards Complete! You knew ${appState.knownCards}/${appState.totalCardsShown} cards (${finalScore}%)`);
+backToMenu();
+}
+}
+
+function updateFlashcardStats() {
+document.getElementById('known-count').textContent = appState.knownCards;
+document.getElementById('total-cards').textContent = appState.totalCardsShown;
+}
+
+// Unknown Words Functions
+function addUnknownWord() {
+const input = document.getElementById('new-word-input');
+const word = input.value.trim();
+if (word && !appState.unknownWords.includes(word)) {
+appState.unknownWords.push(word);
+input.value = '';
+updateUnknownWordsDisplay();
+}
+}
+
+function removeUnknownWord(index) {
+appState.unknownWords.splice(index, 1);
+updateUnknownWordsDisplay();
+}
+
+function updateUnknownWordsDisplay() {
+const container = document.getElementById('unknown-words-display');
+if (appState.unknownWords.length === 0) {
+container.innerHTML = '';
+return;
+}
+
+const wordsHtml = appState.unknownWords.map((word, index) =>
+`<span class="word-tag">${word}<button onclick="removeUnknownWord(${index})">×</button></span>`
+).join('');
+
+container.innerHTML = `
+<p style="font-size: 14px; font-weight: 500; margin: 8px 0;">Collected words (${appState.unknownWords.length}):</p>
+<div style="max-height: 80px; overflow-y: auto; margin-bottom: 8px;">${wordsHtml}</div>
+`;
+}
+
+// Results Functions
+function showResults() {
+updatePerformanceDisplay();
+showScreen('results-screen');
+}
+
+function updatePerformanceDisplay() {
+const performanceList = document.getElementById('performance-list');
+let performanceHtml = '';
+
+// Add all performance stats
+Object.entries(performanceStats).forEach(([key, stats]) => {
+const score = stats.lastScore || 0;
+const scoreClass = score >= 75 ? 'score-strong' : score >= 60 ? 'score-good' : 'score-needs-work';
+const scoreText = stats.total > 0 ? score + '%' : 'Not Started';
+const displayName = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+
+performanceHtml += `
+<div class="performance-item">
+<div>
+<div style="font-weight: 500;">${displayName}</div>
+<div style="font-size: 12px; color: #6b7280;">${stats.correct}/${stats.total} correct</div>
+</div>
+<div class="performance-score ${scoreClass}">${scoreText}</div>
+</div>
+`;
+});
+
+performanceList.innerHTML = performanceHtml;
+updateStudyReport();
+}
+
+function updateStudyReport() {
+const strongAreas = [];
+const needsWork = [];
+
+Object.entries(performanceStats).forEach(([key, stats]) => {
+const displayName = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+if (stats.lastScore >= 75) {
+strongAreas.push(displayName);
+} else if (stats.lastScore < 60 && stats.total > 0) {
+needsWork.push(`${displayName} (${stats.lastScore}%)`);
+}
+});
+
+const reportText = `STRONG AREAS (75%+): ${strongAreas.length > 0 ? strongAreas.join(', ') : 'None yet - keep practicing!'}
+
+NEEDS WORK (<60%): ${needsWork.length > 0 ? needsWork.join(', ') : 'All areas above 60%!'}
+
+UNKNOWN WORDS: ${appState.unknownWords.length > 0 ? appState.unknownWords.join(', ') : 'None collected'}
+
+CONVERSATIONS: ${performanceStats.conversations.completed} completed today
+
+TOTAL PROGRESS: Chapter ${dailyConfig.chapter} - ${dailyConfig.assessmentScore}% mastery`;
+
+document.getElementById('report-text').textContent = reportText;
+}
+
+// Anki Export Function
+function generateAnkiCards() {
+if (!currentContent.flashcards || currentContent.flashcards.length === 0) {
+alert('No flashcards available to export.');
+return;
+}
+
+let ankiText = '';
+currentContent.flashcards.forEach(card => {
+// Format: Front (Kanji), Back (Hiragana/Katakana (English));
+ankiText += `${card.front}, ${card.back};\n`;
+});
+
+// Add unknown words
+appState.unknownWords.forEach(word => {
+ankiText += `${word}, (Unknown - needs definition);\n`;
+});
+
+// Copy to clipboard or download
+navigator.clipboard.writeText(ankiText).then(() => {
+alert('Anki cards copied to clipboard! Paste into Anki import.');
+}).catch(() => {
+// Fallback: show in alert for manual copy
+alert(`Anki Cards:\n\n${ankiText}`);
+});
+}
+
+// Export Functions
+function exportProgress() {
+const progressData = {
+date: dailyConfig.date,
+performance: performanceStats,
+unknownWords: appState.unknownWords,
+conversationHistory: appState.conversationHistory,
+dailyConfig: dailyConfig
+};
+
+const dataStr = JSON.stringify(progressData, null, 2);
+navigator.clipboard.writeText(dataStr).then(() => {
+alert('Progress data copied to clipboard!');
+}).catch(() => {
+alert(`Progress Data:\n\n${dataStr.substring(0, 500)}...`);
+});
+}
+
+function prepareForTomorrow() {
+const wrongQuestions = []; // Would collect from today's mistakes
+const carryOverData = {
+date: new Date(Date.now() + 86400000).toLocaleDateString(), // Tomorrow
+wrongQuestions: wrongQuestions,
+unknownWords: appState.unknownWords,
+weakAreas: Object.entries(performanceStats)
+.filter(([key, stats]) => stats.lastScore < 70)
+.map(([key]) => key)
+};
+
+alert(`Prepared for tomorrow:\n- ${wrongQuestions.length} questions to review\n- ${appState.unknownWords.length} unknown words\n- ${carryOverData.weakAreas.length} weak areas to focus on`);
+exportProgress();
+}
+
+// Content Generation Functions (Mock Data)
+function generateLessonContent(type) {
+const lessons = {
+'tai-vs-tagaru': `
+<h3>Key Difference:</h3>
+<p><strong>たい</strong> = YOUR desires only (私は...たい)<br>
+<strong>たがる</strong> = Someone else's desires (田中さんは...たがる)</p>
+<h3>Formation Rules:</h3>
+<ul>
+<li><strong>たい:</strong> Verb stem + たい (acts like い-adjective)</li>
+<li><strong>たがる:</strong> Verb stem + たがる (conjugates like regular verb)</li>
+</ul>
+`,
+'kedo-vs-node': `
+<h3>Think About the Relationship:</h3>
+<p><strong>けど</strong> = "but/although" (CONTRAST)</p>
+<p><strong>ので</strong> = "so/because" (REASON/CAUSE)</p>
+<h3>Quick Test:</h3>
+<p>If it feels surprising → けど. If it feels logical → ので.</p>
+`
+};
+return lessons[type] || '<p>Lesson content loading...</p>';
+}
+
+function generateExercise(type) {
+const exercises = {
+'tai-tagaru': {
+title: 'たい vs たがる Drill',
+questions: [
+{
+question: '私は新しいスマートフォンを買い＿＿＿です。',
+options: ['たい', 'たがる', 'たがっている', 'たく'],
+correct: 0,
+explanation: 'Your own desire = たい. 私は...たい is correct.'
+},
+{
+question: '田中さんはゲームをし＿＿＿と言いました。',
+options: ['たい', 'たがる', 'たがっている', 'たがります'],
+correct: 2,
+explanation: 'Someone else\'s ongoing desire = たがっている'
+}
+]
+},
+'kedo-node': {
+title: 'けど vs ので Practice',
+questions: [
+{
+question: '雨が降っている＿＿＿、散歩に行きました。',
+options: ['ので', 'けど', 'から', 'のに'],
+correct: 1,
+explanation: 'Contrast: Despite rain, went for walk = けど'
+},
+{
+question: '疲れている＿＿＿、早く帰ります。',
+options: ['けど', 'ので', 'が', 'でも'],
+correct: 1,
+explanation: 'Natural result: Because tired → go home early = ので'
+}
+]
+}
+};
+return exercises[type] || { title: 'Exercise', questions: [] };
+}
+
+function generateAssessmentQuestions() {
+return [
+{
+question: 'AI開発について学び＿＿＿です。',
+options: ['たがる', 'たい', 'たがっている', 'たく'],
+correct: 1,
+explanation: 'Your desire to learn = 学びたい'
+},
+{
+question: 'このゲームは難しい＿＿＿、面白いです。',
+options: ['ので', 'から', 'けど', 'のに'],
+correct: 2,
+explanation: 'Contrast: Hard but interesting = けど'
+}
+// Would generate 15-20 questions
+];
+}
+
+function generateEndOfDayQuestions() {
+return [
+{
+question: 'プログラミングは私＿＿＿難しいです。',
+options: ['に', 'には', 'の', 'が'],
+correct: 1,
+explanation: 'Programming is difficult FOR me = には'
+},
+{
+question: 'エラーが出た＿＿＿、再起動しました。',
+options: ['けど', 'ので', 'が', 'でも'],
+correct: 1,
+explanation: 'Natural result: Because got error → restarted = ので'
+}
+// Would generate 20 questions
+];
+}
+
+function generateFlashcards() {
+return [
+{ front: '欲しがる', back: 'ほしがる (to want - third person)' },
+{ front: 'プログラミング', back: 'プログラミング (programming)' },
+{ front: 'ソフトウェア', back: 'ソフトウェア (software)' },
+{ front: 'バグ', back: 'バグ (bug, software error)' },
+{ front: 'アップデート', back: 'アップデート (update)' }
+// Would generate based on chapter content
+];
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+loadTodaysConfig();
+
+document.getElementById('new-word-input').addEventListener('keypress', function(e) {
+if (e.key === 'Enter') {
+addUnknownWord();
+}
+});
+
+document.getElementById('conversation-input').addEventListener('keypress', function(e) {
+if (e.key === 'Enter') {
+sendConversationMessage();
+}
+});
+});
+
+// Initialize app
+window.addEventListener('load', () => {
+console.log('🇯🇵 Mellow\'s Nihongo Automated System Loaded');
+});
+</script>
 </body>
 </html>
