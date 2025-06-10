@@ -132,6 +132,20 @@ transform: translateY(-1px);
 .button-red { background: #ef4444; color: white; }
 .button-gray { background: #6b7280; color: white; }
 
+ .continue-btn {
+    display: block !important;
+    margin: 16px auto !important;
+    padding: 12px 24px !important;
+    background: #3b82f6 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    width: 100% !important;
+} 
+  
 .button-info {
 font-size: 14px;
 opacity: 0.9;
@@ -1161,30 +1175,41 @@ updateExerciseScore();
 }
 
 function selectExerciseAnswer(selectedIndex) {
-const exercise = currentContent.exercises[appState.currentExerciseType];
-const question = exercise.questions[appState.currentExercise];
-const isCorrect = selectedIndex === question.correct;
+    console.log("Answer selected:", selectedIndex); // Debug line
+    
+    const exercise = currentContent.exercises[appState.currentExerciseType];
+    const question = exercise.questions[appState.currentExercise];
+    const isCorrect = selectedIndex === question.correct;
 
-appState.attempts++;
-if (isCorrect) appState.score++;
+    appState.attempts++;
+    if (isCorrect) appState.score++;
 
-document.getElementById('explanation').textContent = question.explanation;
-document.getElementById('result').classList.remove('hidden');
-document.getElementById('result').style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
-document.getElementById('result').style.color = isCorrect ? '#166534' : '#991b1b';
+    // Disable all option buttons
+    const optionButtons = document.querySelectorAll('#options button');
+    optionButtons.forEach(button => button.disabled = true);
 
-updateExerciseScore();
+    // Show explanation
+    document.getElementById('explanation').textContent = question.explanation;
+    const resultDiv = document.getElementById('result');
+    resultDiv.classList.remove('hidden');
+    resultDiv.style.background = isCorrect ? '#f0fdf4' : '#fef2f2';
+    resultDiv.style.color = isCorrect ? '#166534' : '#991b1b';
 
-setTimeout(() => {
-if (appState.currentExercise < exercise.questions.length - 1) {
-appState.currentExercise++;
-loadExerciseQuestion();
-} else {
-const finalScore = Math.round((appState.score / appState.attempts) * 100);
-alert(`Exercise Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)`);
-backToMenu();
-}
-}, 3000);
+    updateExerciseScore();
+
+    // Force create continue button with inline HTML
+    setTimeout(() => {
+        const buttonHtml = `
+            <button onclick="continueToNextExercise()" 
+                    style="margin-top: 16px; width: 100%; padding: 12px; 
+                           background: #3b82f6; color: white; border: none; 
+                           border-radius: 8px; font-size: 16px; cursor: pointer;">
+                Continue to Next Question
+            </button>
+        `;
+        resultDiv.innerHTML = resultDiv.innerHTML + buttonHtml;
+        console.log("Button added!"); // Debug line
+    }, 100);
 }
 
 function updateExerciseScore() {
@@ -1192,6 +1217,18 @@ document.getElementById('score').textContent = appState.score;
 document.getElementById('attempts').textContent = appState.attempts;
 }
 
+function continueToNextExercise() {
+    console.log("Continue clicked!"); // Debug line
+    if (appState.currentExercise < currentContent.exercises[appState.currentExerciseType].questions.length - 1) {
+        appState.currentExercise++;
+        loadExerciseQuestion();
+    } else {
+        const finalScore = Math.round((appState.score / appState.attempts) * 100);
+        alert(`Exercise Complete! Score: ${appState.score}/${appState.attempts} (${finalScore}%)`);
+        backToMenu();
+    }
+}
+  
 // Conversation Functions
 function startConversation() {
 const topics = dailyConfig.conversationTopics || ['General Conversation'];
